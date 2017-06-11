@@ -2,7 +2,6 @@ package no.kh498.boxy3;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -137,66 +136,7 @@ public class BoxyMain extends ApplicationAdapter {
         }
         this.batch.end();
 
-        updatePlayerLocation();
-    }
-
-    private void updatePlayerLocation() {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
-            this.player.deltaX -= this.player.getMovement() * Gdx.graphics.getDeltaTime();
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
-            this.player.deltaX += this.player.getMovement() * Gdx.graphics.getDeltaTime();
-        }
-        if (isJumpKeyPressed()) {
-            boolean canJump = true;
-            //Disabled automatic rejumping when hitting the ground
-            if (this.player.isOnGround() && !isJumpKeyJustPressed()) {
-                canJump = false;
-                this.player.setOnGround(false);
-            }
-            //Make sure you cannot spam jump key to stay in the air
-            else if (!this.player.isOnGround() && isJumpKeyJustPressed()) {
-                this.player.setCanJump(false);
-            }
-
-            if (this.player.canJump() && canJump) {
-                //JUMP!
-                this.player.deltaY += this.player.getMovement() * Gdx.graphics.getDeltaTime();
-                //do not add forward momentum when above a certain y value
-                if (this.player.getRectangle().y > GROUND_LEVEL * this.player.getMaxJumpHeightModifier()) {
-                    this.player.setCanJump(false);
-                }
-            }
-        }
-        //gravity
-        if (this.player.getRectangle().y > GROUND_LEVEL) {
-            this.player.deltaY -= this.player.getRectangle().y * Gdx.graphics.getDeltaTime();
-        }
-        //lowest y value is ground level
-        else {
-            this.player.getRectangle().y = GROUND_LEVEL;
-            this.player.setCanJump(true);
-            this.player.setOnGround(true);
-        }
-
-        // make sure the player stays within the screen bounds
-        if (this.player.getRectangle().x < 0) {
-            this.player.getRectangle().x = 0;
-        }
-        if (this.player.getRectangle().x > WIDTH - TILE_RESOLUTION) {
-            this.player.getRectangle().x = WIDTH - TILE_RESOLUTION;
-        }
-        if (this.player.getRectangle().y > HEIGHT - TILE_RESOLUTION) {
-            this.player.getRectangle().y = HEIGHT - TILE_RESOLUTION;
-        }
-    }
-
-    private boolean isJumpKeyPressed() {
-        return Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W);
-    }
-
-    private boolean isJumpKeyJustPressed() {
-        return Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W);
+        this.player.updatePlayerLocation();
     }
 
     @Override
