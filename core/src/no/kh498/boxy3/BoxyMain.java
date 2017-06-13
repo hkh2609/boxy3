@@ -43,7 +43,7 @@ public class BoxyMain extends ApplicationAdapter {
         // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WIDTH_RESOLUTION, HEIGHT_RESOLUTION);
-//        camera.zoom = 1.1f;
+        camera.zoom = 2f;
         this.batch = new SpriteBatch(64);
 
 
