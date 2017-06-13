@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import no.kh498.boxy3.tile.AbstractTile;
+import no.kh498.boxy3.tile.TileCobblestone;
 import no.kh498.boxy3.tile.TileFinishFlag;
 
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import java.util.HashMap;
  */
 public enum Tile {
     AIR(-1, 'x', true),
-    COBBLESTONE(0, '0', false),
+    COBBLESTONE(0, '0', false, TileCobblestone.class),
     FINISH_FLAG(1, '1', true, TileFinishFlag.class);
 
 

@@ -69,12 +69,12 @@ public class BoxyMain extends ApplicationAdapter {
 //        camera.position.set(this.player.body.getPosition().x + (HEIGHT_RESOLUTION * .25f), HEIGHT_RESOLUTION / 2, 0);
 
         if (this.debugInfo) {
-            camera.position.set(this.player.body.getPosition().x, 0, 0);
+            camera.position.set(this.player.getBody().getPosition().x, 0, 0);
         }
         else {
             final float leap = 1f;
             final Vector3 position = camera.position;
-            final float i = this.player.body.getPosition().x + (HEIGHT_RESOLUTION * .25f) - position.x;
+            final float i = this.player.getBody().getPosition().x + (HEIGHT_RESOLUTION * .25f) - position.x;
             if (i > 0) {
                 position.x += i * leap * Gdx.graphics.getDeltaTime();
             }

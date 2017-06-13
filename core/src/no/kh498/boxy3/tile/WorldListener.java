@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import no.kh498.boxy3.Player;
 import no.kh498.boxy3.Tile;
 
 /**
@@ -22,7 +23,10 @@ public class WorldListener implements ContactListener {
         if (tile != null) {
             final AbstractTile handler = tile.getHandler();
             if (handler != null) {
-                handler.onPlayerTouch();
+                final Object userData = contact.getFixtureA().getUserData();
+                if (userData instanceof Player) {
+                    handler.onPlayerTouch((Player) userData);
+                }
             }
         }
     }
