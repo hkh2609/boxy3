@@ -62,16 +62,23 @@ public class BoxyMain extends ApplicationAdapter {
         // clear the screen with a dark blue color.
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
-
+        camera.update();
         /* Update positions */
 
         // tell the camera to update its matrices.
 //        camera.position.set(this.player.body.getPosition().x + (HEIGHT_RESOLUTION * .25f), HEIGHT_RESOLUTION / 2, 0);
-        camera.update();
-        final float lerp = 1f;
-        final Vector3 position = camera.position;
-        position.x += ((this.player.body.getPosition().x + (HEIGHT_RESOLUTION * .25f)) - position.x) * lerp *
-                      Gdx.graphics.getDeltaTime();
+
+        if (this.debugInfo) {
+            camera.position.set(this.player.body.getPosition().x, 0, 0);
+        }
+        else {
+            final float leap = 1f;
+            final Vector3 position = camera.position;
+            final float i = this.player.body.getPosition().x + (HEIGHT_RESOLUTION * .25f) - position.x;
+            if (i > 0) {
+                position.x += i * leap * Gdx.graphics.getDeltaTime();
+            }
+        }
 //        position.y += ((HEIGHT_RESOLUTION / 2) - position.y) * lerp * Gdx.graphics.getDeltaTime();
 
         // tell the SpriteBatch to render in the
@@ -92,6 +99,7 @@ public class BoxyMain extends ApplicationAdapter {
 
         debugRenderer.render(world, camera.combined);
         doPhysicsStep(Gdx.graphics.getDeltaTime());
+
     }
 
     @Override
