@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import no.kh498.boxy3.tile.WorldListener;
 
 public class BoxyMain extends ApplicationAdapter {
     private SpriteBatch batch;

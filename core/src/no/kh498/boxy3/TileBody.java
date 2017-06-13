@@ -59,8 +59,8 @@ public class TileBody {
     public void draw(final Batch batch) {
         if (this.tile.getTexture() != null) {
             for (int i = 1; i <= this.amounts; i++) {
-//                batch.draw(this.tile.getTexture(), (this.x + BoxyMain.TILE_RESOLUTION) * i,
-//                           (this.y - BoxyMain.TILE_RESOLUTION), BoxyMain.TILE_RESOLUTION, BoxyMain.TILE_RESOLUTION);
+                batch.draw(this.tile.getTexture(), (this.x + BoxyMain.TILE_RESOLUTION) * i,
+                           (this.y - BoxyMain.TILE_RESOLUTION), BoxyMain.TILE_RESOLUTION, BoxyMain.TILE_RESOLUTION);
             }
 
         }

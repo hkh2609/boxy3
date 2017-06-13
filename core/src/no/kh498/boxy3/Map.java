@@ -17,14 +17,14 @@ import java.util.List;
 public class Map {
 
     private final String levelName;
-    private final TileEntity[][] tiles;
+    private final TileBody[][] tiles;
 
     Map(final String levelName) {
         this.levelName = "levels/" + levelName;
         this.tiles = load();
     }
 
-    private TileEntity[][] load() {
+    private TileBody[][] load() {
 
         final HashMap<Integer, List> tempMap = new HashMap<Integer, List>();
         final FileHandle internal = Gdx.files.internal(this.levelName);
@@ -101,20 +101,12 @@ public class Map {
         if (this.tiles == null) {
             return;
         }
-        for (final TileEntity[] tile : this.tiles) {
-            for (final TileEntity aTile : tile) {
+        for (final TileBody[] tile : this.tiles) {
+            for (final TileBody aTile : tile) {
                 if (aTile != null) {
                     aTile.draw(batch);
                 }
             }
         }
-    }
-
-    static TileEntity[] getDefaultGround() {
-        final TileEntity[] ground = new TileEntity[BoxyMain.WIDTH_RESOLUTION];
-        for (int i = 0; i < BoxyMain.WIDTH_RESOLUTION; i++) {
-            ground[i] = new TileEntity(Tile.COBBLESTONE, i * BoxyMain.TILE_RESOLUTION, BoxyMain.TILE_RESOLUTION);
-        }
-        return ground;
     }
 }
