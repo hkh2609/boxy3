@@ -48,6 +48,7 @@ public class BoxyMain extends ApplicationAdapter {
 
         debugRenderer = new Box2DDebugRenderer();
         world = new World(new Vector2(0, -100), true);
+        world.setContactListener(new WorldListener());
 
         // create a Rectangle to logically represent the player
         this.player = new Player();
