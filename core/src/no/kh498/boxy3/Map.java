@@ -50,43 +50,41 @@ public class Map {
 
         try {
             int i = 0;
-            int maxJ = -1;
+            int maxArraySize = -1;
             while (br.ready()) {
                 final String line = br.readLine();
                 System.out.println("line " + i + ": " + line);
-                final ArrayList<TileEntity> tileEntities = new ArrayList<TileEntity>();
-                int j = 0;
-                for (final char c : line.toCharArray()) {
-                    if (Character.isDigit(c)) {
-                        final int tileIndex = Character.getNumericValue(c);
-
-                        System.out.println("tileIndex " + tileIndex + " (c: " + c + ")");
-                        if (tileIndex <= 0) {
-                            final TileEntity tileEntity = new TileEntity(tileIndex, j * BoxyMain.TILE_RESOLUTION,
-                                                                         (nrOfLines - i) * BoxyMain.TILE_RESOLUTION);
-                            System.out.println(tileEntity);
-                            tileEntities.add(tileEntity);
-                        }
+                final ArrayList<TileBody> tileEntities = new ArrayList<TileBody>();
+                final char[] chars = line.toCharArray();
+                int arraySize = 0;
+                for (int j = 0; j < chars.length; j += 0) {
+                    final char baseChar = chars[j];
+                    int amount = 1;
+                    while (j + amount < chars.length && baseChar == chars[j + amount]) {
+                        amount++;
                     }
-                    else {
-                        tileEntities.add(null);
-                    }
-                    j++;
-                    if (maxJ < j) {
-                        maxJ = j;
+                    final TileBody tileEntity =
+                        new TileBody(baseChar, j * BoxyMain.TILE_RESOLUTION, (nrOfLines - i) * BoxyMain.TILE_RESOLUTION,
+                                     amount);
+                    tileEntities.add(tileEntity);
+                    arraySize++;
+                    j += amount;
+                    if (maxArraySize < arraySize) {
+                        maxArraySize = arraySize;
                     }
                 }
+
                 tempMap.put(i, tileEntities);
                 i++;
             }
             inputStream.close();
             br.close();
 
-            final TileEntity[][] returnArray = new TileEntity[i][maxJ];
+            final TileBody[][] returnArray = new TileBody[i][maxArraySize];
             for (final java.util.Map.Entry<Integer, List> collection : tempMap.entrySet()) {
                 final int key = collection.getKey();
                 //noinspection unchecked
-                final ArrayList<TileEntity> value = (ArrayList<TileEntity>) collection.getValue();
+                final ArrayList<TileBody> value = (ArrayList<TileBody>) collection.getValue();
                 for (int j = 0; j < value.size(); j++) {
                     returnArray[key][j] = value.get(j);
                 }
