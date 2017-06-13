@@ -14,7 +14,7 @@ import java.util.List;
  * @author karl henrik
  * @since 0.1.0
  */
-public class Map {
+class Map {
 
     private final String levelName;
     private final TileBody[][] tiles;
@@ -25,7 +25,6 @@ public class Map {
     }
 
     private TileBody[][] load() {
-
         final HashMap<Integer, List> tempMap = new HashMap<Integer, List>();
         final FileHandle internal = Gdx.files.internal(this.levelName);
         final InputStream inputStream = internal.read();
@@ -35,6 +34,7 @@ public class Map {
         final int nrOfLines;
         try {
             lnr = new LineNumberReader(new FileReader(internal.file()));
+            //noinspection ResultOfMethodCallIgnored
             lnr.skip(Long.MAX_VALUE);
             nrOfLines = lnr.getLineNumber() + 1;
             System.out.println("nrOfLines " + nrOfLines);
@@ -97,7 +97,7 @@ public class Map {
         return null;
     }
 
-    public void draw(final Batch batch) {
+    void draw(final Batch batch) {
         if (this.tiles == null) {
             return;
         }

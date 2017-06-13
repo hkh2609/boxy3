@@ -25,7 +25,7 @@ public class BoxyMain extends ApplicationAdapter {
     static final int WIDTH_RESOLUTION = 30;
     static final int HEIGHT_RESOLUTION = 18;
 
-    private final boolean debugInfo = true;
+    private final boolean debugInfo = false;
 
     private float accumulator = 0;
 
